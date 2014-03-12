@@ -1,4 +1,4 @@
 websiterank-web
 ===============
 
-Web frontend for websiterank application
+Web frontend for websiterank application. 
