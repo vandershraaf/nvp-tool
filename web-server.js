@@ -1,7 +1,8 @@
 var util = require('util'),
     connect = require('connect'),
-    port = 8111;
+    port = 8000; // May not be used
 
-connect.createServer(connect.static(__dirname)).listen(port);
-util.puts('Listening on ' + port + '...');
+util.puts('Assigned port = '+process.env.PORT);
+connect.createServer(connect.static(__dirname)).listen(process.env.PORT);
+util.puts('Listening on ' + process.env.PORT + '...');
 util.puts('Press Ctrl + C to stop.');
