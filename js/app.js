@@ -1,46 +1,43 @@
-var app = angular.module('websiterank-web',[]);
+var app = angular.module('nvp-tool',[]);
 
 
 app.controller("mainController", function($scope, $http){
-	var rootService = "http://websiterank.herokuapp.com/services";
-	$scope.result = {};
-	$scope.allDate = [];
-	$scope.dateSelected = null;
-	$scope.websiteSelected = null;
-	// Initialize visit table 
+	$scope.pairArray = new Array();
+	$scope.debug = "";
+	$scope.input = "";
+	$scope.inputChanged = function(){
+		//$scope.debug = debugArray(splitNVP($scope.input));
+		$scope.pairArray = debugArray(splitNVP($scope.input));
+	};
     $scope.init = function() {
-    	// TODO: Initialize value of filter form as well
-    	var visitService  = rootService + "/visits/";
-        getResult(visitService);
-        
-        var dateService = rootService + "/dateVisited/";
-        $http.get(dateService).success(function(data) {
-            console.log(data);
-            $scope.allDate = data;
-        }).error(function(error) {
- 
-        });
     };
-    $scope.showByWebsite = function(){
-    	var visitService  = rootService + "/visits/website/" + $scope.websiteSelected;
-        getResult(visitService);
-    };
-    $scope.showByDate = function(){
-    	var visitService  = rootService + "/visits/date/" + $scope.dateSelected;
-        getResult(visitService);
-    };
-    $scope.showAll = function(){
-    	var visitService  = rootService + "/visits/";
-        getResult(visitService);
-    }
+	
+	function checkFormat(inputStr){
+		// TODO 
+	}
+	function splitNVP(inputStr){
+		var amp =  inputStr.split('&');
+		var result = new Array();
+		for (var i = 0; i < amp.length; i++){
+			var pair = amp[i].split('=');
+			result[i] = new Array();
+			result[i]['key'] = pair[0];
+			result[i]['value'] = pair[1];
+		}
+		return result;
+	}
+	
+	// FOR TESTING PURPOSE ONLY
+	function debugArray(array){
+		var result = "";
+		for (var i = 0; i < array.length; i++){
+			result = result + array[i]['key'];
+			result = result + " => ";
+			result = result + array[i]['value'];
+			result = result + ";";
+		}
+		return result;
+	}
+	
     
-    function getResult(url){
-        $http.get(url).success(function(data) {
-            console.log(data);
-            $scope.result = data;
-        }).error(function(error) {
- 
-        });
-    }
- 
 });
