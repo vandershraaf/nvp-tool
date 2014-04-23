@@ -7,7 +7,7 @@ app.controller("mainController", function($scope, $http){
 	$scope.input = "";
 	$scope.inputChanged = function(){
 		//$scope.debug = debugArray(splitNVP($scope.input));
-		$scope.pairArray = debugArray(splitNVP($scope.input));
+		$scope.pairArray = splitNVP($scope.input);
 	};
     $scope.init = function() {
     };
@@ -20,9 +20,9 @@ app.controller("mainController", function($scope, $http){
 		var result = new Array();
 		for (var i = 0; i < amp.length; i++){
 			var pair = amp[i].split('=');
-			result[i] = new Array();
-			result[i]['key'] = pair[0];
-			result[i]['value'] = pair[1];
+			result[i] = {};
+			result[i].key = pair[0];
+			result[i].value = pair[1];
 		}
 		return result;
 	}

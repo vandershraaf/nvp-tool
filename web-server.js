@@ -1,6 +1,6 @@
 var util = require('util'),
     connect = require('connect'),
-    port = 2323; // May not be used
+    port = 6969; // May not be used
 
 util.puts('Assigned port = '+port);
 connect.createServer(connect.static(__dirname)).listen(port);
